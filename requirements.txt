@@ -1,0 +1,9 @@
+flask 
+firebase-admin 
+python-dotenv 
+Flask
+opencv-python
+pytesseract
+firebase-admin
+torch
+transformers

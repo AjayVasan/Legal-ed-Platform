@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Document Analysis Results</h1>
+    </header>
+    
+    <div class="results-container">
+        <!-- Document Classification -->
+        <section class="result-section">
+            <h2>Document Classification</h2>
+            <div class="document-type">
+                <div class="doc-type-badge">{{ doc_type }}</div>
+                <p>This document has been classified as a <strong>{{ doc_type }}</strong>.</p>
+            </div>
+        </section>
+        
+        <!-- Extracted Clauses -->
+        <section class="result-section">
+            <h2>Extracted Legal Clauses</h2>
+            {% if clauses %}
+                <div class="clauses-grid">
+                    {% for key, clause in clauses.items() %}
+                        <div class="clause-card">
+                            <h3>{{ key|title }}</h3>
+                            <p>{{ clause }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No legal clauses were detected in this document.</p>
+            {% endif %}
+        </section>
+        
+        <!-- Named Entities -->
+        <section class="result-section">
+            <h2>Named Entities</h2>
+            <div class="entities-container">
+                {% if entities %}
+                    <div class="entity-tags">
+                        {% for entity in entities %}
+                            <div class="entity-tag entity-{{ entity.label }}">
+                                {{ entity.entity }}
+                                <span class="entity-label">{{ entity.label }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No named entities were detected in this document.</p>
+                {% endif %}
+            </div>
+        </section>
+        
+        <!-- Quiz Preview -->
+        <!-- In your results.html template, replace the quiz section with this: -->
+<section class="result-section">
+    <h2>Generated Quiz</h2>
+    {% if quiz %}
+        <p>A quiz with {{ quiz|length }} questions has been generated based on this document.</p>
+        <div class="quiz-preview">
+            <h3>Sample Questions:</h3>
+            <ul>
+                {% for question in quiz[:2] %}
+                    <li>{{ question.question }}</li>
+                {% endfor %}
+                {% if quiz|length > 2 %}
+                    <li>... and {{ quiz|length - 2 }} more questions</li>
+                {% endif %}
+            </ul>
+        </div>
+        <a href="{{ url_for('take_quiz', scan_id=recent_scans[0].id if recent_scans else '', user=user_id) }}" class="btn btn-primary">Take Quiz Now</a>
+    {% else %}
+        <p>No quiz could be generated for this document.</p>
+    {% endif %}
+</section>
+        
+        <!-- Achievements Earned -->
+        {% if achievements %}
+            <section class="result-section achievements-earned">
+                <h2>Achievements Unlocked!</h2>
+                <div class="achievements-container">
+                    {% for achievement in achievements %}
+                        <div class="achievement-card achievement-new">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-info">
+                                <h3>{{ achievement.name }}</h3>
+                                <p>{{ achievement.description }}</p>
+                                <div class="achievement-xp">+{{ achievement.xp }} XP</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+    
+    <div class="results-actions">
+        <a href="{{ url_for('dashboard', user=user_id) }}" class="btn">View Dashboard</a>
+        <a href="{{ url_for('index') }}" class="btn">Analyze Another Document</a>
+    </div>
+</body>
+</html>

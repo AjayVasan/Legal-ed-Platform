@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Learning Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Legal Learning Dashboard</h1>
+        <div class="user-info">
+            <p><strong>User ID:</strong> {{ user_id }}</p>
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <h2>Your Progress</h2>
+            <div class="level-badge">
+                <span class="level-number">{{ level }}</span>
+                <span class="level-label">LEVEL</span>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ progress }}%"></div>
+                </div>
+                <div class="progress-info">
+                    <span class="xp">{{ xp }} XP</span>
+                    <span class="next-level">{{ progress }}% to Level {{ level + 1 }}</span>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value">{{ scan_count }}</div>
+                    <div class="stat-label">Documents Scanned</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ quiz_completed }}</div>
+                    <div class="stat-label">Quizzes Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ total_clauses }}</div>
+                    <div class="stat-label">Clauses Discovered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ doc_types_analyzed }}</div>
+                    <div class="stat-label">Document Types</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Activity Section -->
+        <section class="activity-section">
+            <h2>Recent Activity</h2>
+            <div class="recent-scans">
+                {% if recent_scans %}
+                    <table class="scans-table">
+                        <thead>
+                            <tr>
+                                <th>Document Type</th>
+                                <th>Clauses</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for scan in recent_scans %}
+                                <tr>
+                                    <td>{{ scan.doc_type }}</td>
+                                    <td>{{ scan.clauses|length }} clauses</td>
+                                    <td>{{ scan.timestamp }}</td>
+                                    <td>
+                                        <a href="{{ url_for('take_quiz', scan_id=scan.id, user=user_id) }}" class="btn btn-primary">Take Quiz</a>                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No recent document scans found.</p>
+                {% endif %}
+            </div>
+        </section>
+        
+        <!-- Achievements Section -->
+        <section class="achievements-section">
+            <h2>Your Achievements</h2>
+            <div class="achievements-container">
+                {% if achievements %}
+                    {% for achievement in achievements %}
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-info">
+                                <h3>{{ achievement.name }}</h3>
+                                <p>{{ achievement.description }}</p>
+                                <div class="achievement-xp">+{{ achievement.xp }} XP</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>You haven't earned any achievements yet. Start scanning documents to earn rewards!</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+    
+    <div class="dashboard-actions">
+        <a href="{{ url_for('index') }}" class="btn">Scan New Document</a>
+        <a href="{{ url_for('leaderboard') }}" class="btn">View Leaderboard</a>
+    </div>
+
+    <script>
+        // You can add interactive charts or graphs here using Chart.js
+        // This is a placeholder for future enhancements
+    </script>
+</body>
+</html>

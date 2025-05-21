@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="results-container">
+        <h1>Quiz Results</h1>
+        
+        <div class="score-summary {% if perfect_score %}perfect-score{% endif %}">
+            <h2>Your Score: {{ score }}/{{ total_questions }} ({{ "%.1f"|format(percentage) }}%)</h2>
+            <p>{{ "Perfect score! 🎉" if perfect_score else "Good job!" }}</p>
+        </div>
+        
+        <div class="answers-review">
+            <h3>Question Review</h3>
+            {% for answer in answers %}
+            <div class="answer {% if answer.correct %}correct{% else %}incorrect{% endif %}">
+                <h4>{{ answer.question }}</h4>
+                <p>Your answer: {{ answer.user_answer }}</p>
+                {% if not answer.correct %}
+                <p class="correct-answer">Correct answer: {{ answer.correct_answer }}</p>
+                {% endif %}
+                <p class="result">{{ "✓ Correct" if answer.correct else "✗ Incorrect" }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="actions">
+            <a href="{{ url_for('dashboard', user=user_id) }}" class="btn">View Dashboard</a>
+            <a href="{{ url_for('index') }}" class="btn">Analyze Another Document</a>
+        </div>
+    </div>
+</body>
+</html>

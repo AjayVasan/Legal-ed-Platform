@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Document Quiz</h1>
+        <p>Test your knowledge of the document you just analyzed!</p>
+        
+        <form method="POST" action="{{ url_for('submit_quiz', scan_id=scan_id, user=user_id) }}">
+            {% for question in quiz %}
+            <div class="question">
+                <h3>Question {{ question.number }}: {{ question.question }}</h3>
+                
+                {% if question.type == "multiple_choice" %}
+                    {% for option in question.options %}
+                    <div class="option">
+                        <input type="radio" id="q{{ question.number }}_{{ loop.index }}" 
+                               name="q{{ question.number }}" value="{{ option }}" required>
+                        <label for="q{{ question.number }}_{{ loop.index }}">{{ option }}</label>
+                    </div>
+                    {% endfor %}
+                {% elif question.type == "true_false" %}
+                    <div class="option">
+                        <input type="radio" id="q{{ question.number }}_true" 
+                               name="q{{ question.number }}" value="True" required>
+                        <label for="q{{ question.number }}_true">True</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q{{ question.number }}_false" 
+                               name="q{{ question.number }}" value="False" required>
+                        <label for="q{{ question.number }}_false">False</label>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="submit-btn">Submit Quiz</button>
+        </form>
+    </div>
+</body>
+</html>

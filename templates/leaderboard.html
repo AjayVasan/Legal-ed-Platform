@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Learning Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Legal Learning Leaderboard</h1>
+    </header>
+    
+    <div class="leaderboard-container">
+        <section class="leaderboard-section">
+            <h2>Top Legal Learners</h2>
+            
+            {% if current_user and current_user_rank %}
+                <div class="user-rank-info">
+                    <p>Your Rank: <strong>#{{ current_user_rank }}</strong></p>
+                </div>
+            {% endif %}
+            
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Level</th>
+                        <th>XP</th>
+                        <th>Documents</th>
+                        <th>Achievements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr {% if user.user_id == current_user %}class="current-user"{% endif %}>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.level }}</td>
+                            <td>{{ user.xp }}</td>
+                            <td>{{ user.scan_count }}</td>
+                            <td>{{ user.achievement_count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+    
+    <div class="leaderboard-actions">
+        <a href="{{ url_for('index') }}" class="btn">Analyze Document</a>
+        {% if current_user %}
+            <a href="{{ url_for('dashboard', user=current_user) }}" class="btn">View Dashboard</a>
+        {% endif %}
+    </div>
+</body>
+</html>

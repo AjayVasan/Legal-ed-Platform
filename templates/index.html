@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analysis Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Legal Document Analysis</h1>
+    </header>
+    
+    <div class="request-container">
+        <section class="upload-section">
+            <h2>Upload Legal Document</h2>
+            <form action="{{ url_for('analyze_document') }}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="document">Select Document to Analyze:</label>
+                    <input type="file" id="document" name="document" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user_id">User ID:</label>
+                    <input type="text" id="user_id" name="user_id" value="{{ request.args.get('user', 'anonymous') }}" required>
+                </div>
+                
+                <!-- <div class="form-group">
+                    <label for="doc_type">Document Type (Optional):</label>
+                    <select id="doc_type" name="doc_type">
+                        <option value="">Auto-detect document type</option>
+                        <option value="Employment Contract">Employment Contract</option>
+                        <option value="Non-Disclosure Agreement">Non-Disclosure Agreement</option>
+                        <option value="Service Agreement">Service Agreement</option>
+                        <option value="Purchase Agreement">Purchase Agreement</option>
+                        <option value="License Agreement">License Agreement</option>
+                        <option value="Lease Agreement">Lease Agreement</option>
+                    </select>
+                </div> -->
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Analyze Document</button>
+                </div>
+            </form>
+        </section>
+        
+        <section class="info-section">
+            <h2>About Legal Learning</h2>
+            <p>Upload legal documents to analyze their contents, extract key clauses, and test your understanding through automatically generated quizzes.</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">📄</div>
+                    <h3>Document Classification</h3>
+                    <p>Our AI automatically identifies the type of legal document you've uploaded.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📋</div>
+                    <h3>Clause Extraction</h3>
+                    <p>Key legal clauses are identified and presented for quick review.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Learning Quizzes</h3>
+                    <p>Test your understanding with customized quizzes based on your documents.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Earn Achievements</h3>
+                    <p>Level up your legal knowledge by earning achievements and XP.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="request-actions">
+        <a href="{{ url_for('dashboard', user=request.args.get('user', 'anonymous')) }}" class="btn">View Dashboard</a>
+        <a href="{{ url_for('leaderboard') }}" class="btn">View Leaderboard</a>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Legal Learning Dashboard. All rights reserved.</p>
+    </footer>
+</body>
+</html>
