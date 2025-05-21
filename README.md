@@ -1,14 +1,5 @@
 # ⚖️ Legal-ed Platform – Vision-Enhanced Gamified Legal Literacy 🎮📚
 
-<div align="center">
-  <img src="https://img.shields.io/github/stars/AjayVasan/Legal-ed-Platform?style=social" />
-  <img src="https://img.shields.io/github/forks/AjayVasan/Legal-ed-Platform?style=social" />
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" />
-  <img src="https://img.shields.io/badge/Status-Active-blue.svg" />
-</div>
-
----
-
 ## 📌 Overview
 
 **Legal-ed Platform** is an AI-powered, vision-enhanced gamified learning system designed to simplify and democratize **legal literacy** and **skill development** for students and citizens.
@@ -24,9 +15,7 @@ This platform combines **game mechanics**, **machine learning**, **computer visi
 | 🎮 **Gamified Learning** | Points, badges, leaderboards, and real-life legal scenario simulations to improve engagement |
 | 👁️ **Computer Vision** | Facial recognition, attention detection, and emotion-based content tuning |
 | 🧠 **Reinforcement Learning** | Adaptive difficulty and smart feedback based on user performance and interaction |
-| 🗣️ **Chatbot & Voice Support** | Speech-to-text and natural conversation with legal chatbot using NLU + Legal-BERT |
 | 🧾 **Clause Extraction** | AI-powered NLP for document analysis, clause detection, and smart quizzes |
-| 🔊 **Text-to-Speech Support** | AI-generated voice instructions and legal narration for better accessibility |
 | 📈 **Smart Analytics** | Tracks learner progress, feedback loops, and custom challenge suggestions |
 
 ---
@@ -38,7 +27,7 @@ This platform combines **game mechanics**, **machine learning**, **computer visi
 | 🌐 **Frontend** | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white) ![Flask](https://img.shields.io/badge/-Flask-black?logo=flask&logoColor=white) |
 | ⚙️ **Backend**  | ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white) ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black) |
 | 🧠 **AI/ML**    | ![TensorFlow](https://img.shields.io/badge/-TensorFlow-FF6F00?logo=tensorflow&logoColor=white) ![OpenCV](https://img.shields.io/badge/-OpenCV-5C3EE8?logo=opencv&logoColor=white) |
-| 🗄️ **Database** | ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white) ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black) |
+| 🗄️ **Database** |  ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black) |
 
 ---
 
@@ -150,7 +139,7 @@ Legal-ed-Platform/
 
 - **Ajay Vasan S**
   - 📧 mrajayvasan@gmail.com
-  - 🔗 [LinkedIn](https://www.linkedin.com/in/ajayvasan/)
+  - 🔗 [LinkedIn](www.linkedin.com/in/ajay-vasan)
 ---
 
 ## 📄 License
