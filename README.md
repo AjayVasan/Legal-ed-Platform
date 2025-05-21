@@ -1,5 +1,4 @@
 # ⚖️ Legal-ed Platform – Vision-Enhanced Gamified Legal Literacy 🎮📚
-
 ## 📌 Overview
 
 **Legal-ed Platform** is an AI-powered, vision-enhanced gamified learning system designed to simplify and democratize **legal literacy** and **skill development** for students and citizens.
